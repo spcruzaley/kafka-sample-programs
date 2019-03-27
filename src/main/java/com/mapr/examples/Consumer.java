@@ -50,6 +50,7 @@ public class Consumer {
                 timeouts = 0;
             }
             for (ConsumerRecord<String, String> record : records) {
+                System.out.println("Comes from " + record.topic());
                 switch (record.topic()) {
                     case "fast-messages":
                         // the send time is encoded inside the message
