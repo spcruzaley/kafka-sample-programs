@@ -43,7 +43,11 @@ public class Consumer {
         while (true) {
             // read records with a short timeout. If we time out, we don't really care.
             ConsumerRecords<String, String> records = consumer.poll(200);
-            if (records.count() == 0) {
+            for (ConsumerRecord record: records){
+                System.out.println(String.format("Topic - %s, Partition - %d, Value: %s",
+                        record.topic(), record.partition(), record.value()));
+            }
+            /*if (records.count() == 0) {
                 timeouts++;
             } else {
                 System.out.printf("Got %d records after %d timeouts\n", records.count(), timeouts);
@@ -84,7 +88,7 @@ public class Consumer {
                     default:
                         throw new IllegalStateException("Shouldn't be possible to get message on topic " + record.topic());
                 }
-            }
+            }*/
         }
     }
 }
